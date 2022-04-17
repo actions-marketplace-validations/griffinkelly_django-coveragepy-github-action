@@ -1,4 +1,4 @@
-name: Python Django Coverage GitHub Action
+name: Python 2.7 Django Coverage GitHub Action
 inputs:
   django-app:
     description: "Application"
