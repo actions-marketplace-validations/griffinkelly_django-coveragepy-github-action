@@ -1,0 +1,5 @@
+- name: Python Django Test Session
+  uses: ./ # Uses an action in the root directory
+  id: python-sql
+  with:
+    sql_id: 1
