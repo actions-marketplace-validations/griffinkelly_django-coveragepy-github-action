@@ -8,8 +8,6 @@ echo "Starting ${GITHUB_WORKFLOW}:${GITHUB_ACTION}"
 APP=$1
 MIN_COVERAGE=$2
 
-# start MySQL
-service mysql start
 
 # setup run settings
 if [ -z "${APP}" ]; then
@@ -23,7 +21,7 @@ fi
 
 # init virtual environment
 if ! [ -e "${GITHUB_WORKSPACE}/${VENV_NAME}" ]; then
-    python3 -m venv "${GITHUB_WORKSPACE}/${VENV_NAME}"
+    python -m venv "${GITHUB_WORKSPACE}/${VENV_NAME}"
 fi
 
 source "${GITHUB_WORKSPACE}/${VENV_NAME}/bin/activate"
@@ -31,7 +29,6 @@ source "${GITHUB_WORKSPACE}/${VENV_NAME}/bin/activate"
 pip install -r reqs
 
 echo "Base setup complete. Setting up a sample DB url and running..."
-# export DATABASE_URL='mysql://ctest:coveragetest123@127.0.0.1:3306/demo'
 
 # This will automatically fail (set -e is set by default) if the tests fail, which is OK.
 coverage run --source "${APP_LOCATION}" manage.py test "${APP}"
